@@ -1,18 +1,21 @@
 package com.derivedmed.transformation.controller;
 
 
-import com.derivedmed.transformation.input.ConsoleSource;
 import com.derivedmed.transformation.input.InputSource;
-import com.derivedmed.transformation.input.InputSourceCreator;
-import com.derivedmed.transformation.simbols.Simbols;
+import com.derivedmed.transformation.simbols.AlgebraicOperatorsPriority;
+import com.derivedmed.transformation.utils.InputSourceSelector;
+import com.derivedmed.transformation.utils.Validator;
 
 import java.util.List;
-import java.util.Stack;
+import java.util.Optional;
 
+/**
+ * App processes controller.
+ *
+ */
 public class Transformer {
     private static Transformer transformer = new Transformer();
-    private Simbols simbols;
-    private InputSourceCreator inputSourceCreator = InputSourceCreator.getInstance();
+    private AlgebraicOperatorsPriority algebraicOperatorsPriority;
     private InputSource inputSource;
 
     public static Transformer getInstance() {
@@ -20,19 +23,16 @@ public class Transformer {
     }
 
     private Transformer() {
-        simbols = Simbols.getInstance();
-        inputSource = new ConsoleSource();
+        algebraicOperatorsPriority = AlgebraicOperatorsPriority.getInstance();
     }
-
+//    For app correctly work we need to get inputsource(console or file),
+//        get list of rows, check them on validity, transform it and display on console.
     public void start(){
-        /*
-        * If U want to get input from console Just ask inputSourceCreator to return ConsoleSource.
-        * */
-        inputSource = inputSourceCreator.getFileSource("test.txt");
-        List<String> inputs = inputSource.getInput();
-        for (String input : inputs){
-            if (simbols.checkExp(input)){
-                System.out.println(Realization.transform(input,simbols));
+        inputSource = InputSourceSelector.getInputSource();
+        Optional<List<String>> inputs = inputSource.getInput();
+        for (String input : inputs.get()){
+            if (Validator.checkExp(input)){
+                System.out.println(TransformRealization.transform(input, algebraicOperatorsPriority));
             }
         }
     }

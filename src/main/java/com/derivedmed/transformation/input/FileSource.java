@@ -1,21 +1,30 @@
 package com.derivedmed.transformation.input;
 
+import com.derivedmed.transformation.utils.InputSourceSelector;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+/**
+ * Input source from file.
+ */
 public class FileSource implements InputSource {
+    private final Logger logger = Logger.getLogger(InputSourceSelector.class.getName());
 
     private StringBuilder PATH = new StringBuilder("src\\main\\resources\\");
 
-    public FileSource(String fileName) {
+    FileSource(String fileName) {
         this.PATH.append(fileName);
     }
 
     @Override
-    public List<String> getInput() {
+    public Optional<List<String>> getInput() {
         List<String> inputs = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(PATH.toString()))) {
             String line;
@@ -23,9 +32,9 @@ public class FileSource implements InputSource {
                 inputs.add(line);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.log(Level.WARNING,"IOException found",e);
         }
-        return inputs;
+        return Optional.of(inputs);
     }
 
 }
