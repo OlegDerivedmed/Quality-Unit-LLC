@@ -1,6 +1,7 @@
 package com.derivedmed.transformation.utils;
 
 import com.derivedmed.transformation.symbols.AlgebraicOperatorsPriority;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -17,7 +18,7 @@ public class Validator {
 
     private Validator() {
     }
-    public static boolean checkExp(String expression) {
+    public static boolean checkExp(@NotNull String expression) {
         Pattern p = Pattern.compile("^[a-z0-9(^*+\\d-)]+");
         Matcher m = p.matcher(expression);
         return m.matches();

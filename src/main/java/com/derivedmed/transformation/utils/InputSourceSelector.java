@@ -2,18 +2,20 @@ package com.derivedmed.transformation.utils;
 
 import com.derivedmed.transformation.input.InputSource;
 import com.derivedmed.transformation.input.InputSourceFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  * Util class which helps to chose what kind of input we want to get.
  */
 public class InputSourceSelector {
-    private static final Logger logger = Logger.getLogger(InputSourceSelector.class.getName());
+
+    static final Logger userLogger = LogManager.getLogger("Logger");
     public static InputSource getInputSource() {
         InputSource inputSource=null;
         try {
@@ -22,20 +24,20 @@ public class InputSourceSelector {
             String filename;
             while (true) {
                 String inputType = reader.readLine();
-                if (inputType.equals("f")) {
-                    System.out.println("Enter path to file");
+                if ("f".equals(inputType)) {
+                    System.out.println("Enter not empty path to file");
                     filename = reader.readLine();
                     inputSource = InputSourceFactory.getInstance().getFileSource(filename);
                     break;
                 }
-                if (inputType.equals("c")) {
+                if ("c".equals(inputType)) {
                     inputSource = InputSourceFactory.getInstance().getConsoleSource();
                     break;
                 }
                 System.out.println("Enter valid symbol (c/f)");
             }
         } catch (IOException e) {
-            logger.log(Level.WARNING,"IOException found",e);
+            userLogger.info("Not correct path");
         }
         return inputSource;
     }
