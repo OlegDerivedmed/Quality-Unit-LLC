@@ -1,4 +1,4 @@
-package com.derivedmed.transformation.simbols;
+package com.derivedmed.transformation.symbols;
 
 import java.util.HashMap;
 

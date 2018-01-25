@@ -1,6 +1,6 @@
 package com.derivedmed.transformation.utils;
 
-import com.derivedmed.transformation.simbols.AlgebraicOperatorsPriority;
+import com.derivedmed.transformation.symbols.AlgebraicOperatorsPriority;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -24,7 +24,7 @@ public class Validator {
     }
 
     public static int getPriority(char symbol, AlgebraicOperatorsPriority algebraicOperatorsPriority) {
-        if (algebraicOperatorsPriority.priority.get(symbol)==null){
+        if (!algebraicOperatorsPriority.priority.containsKey(symbol)){
             return Integer.MAX_VALUE;
         }
         return algebraicOperatorsPriority.priority.get(symbol);

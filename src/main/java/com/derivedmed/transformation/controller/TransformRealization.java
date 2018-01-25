@@ -1,6 +1,6 @@
 package com.derivedmed.transformation.controller;
 
-import com.derivedmed.transformation.simbols.AlgebraicOperatorsPriority;
+import com.derivedmed.transformation.symbols.AlgebraicOperatorsPriority;
 import com.derivedmed.transformation.utils.Validator;
 
 import java.util.Deque;

@@ -2,7 +2,7 @@ package com.derivedmed.transformation.controller;
 
 
 import com.derivedmed.transformation.input.InputSource;
-import com.derivedmed.transformation.simbols.AlgebraicOperatorsPriority;
+import com.derivedmed.transformation.symbols.AlgebraicOperatorsPriority;
 import com.derivedmed.transformation.utils.InputSourceSelector;
 import com.derivedmed.transformation.utils.Validator;
 

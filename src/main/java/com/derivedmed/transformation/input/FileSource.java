@@ -17,10 +17,10 @@ import java.util.logging.Logger;
 public class FileSource implements InputSource {
     private final Logger logger = Logger.getLogger(InputSourceSelector.class.getName());
 
-    private StringBuilder PATH = new StringBuilder("src\\main\\resources\\");
+    private final String PATH;
 
-    FileSource(String fileName) {
-        this.PATH.append(fileName);
+    FileSource(String path) {
+        PATH = path;
     }
 
     @Override

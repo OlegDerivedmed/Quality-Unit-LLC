@@ -23,7 +23,7 @@ public class InputSourceSelector {
             while (true) {
                 String inputType = reader.readLine();
                 if (inputType.equals("f")) {
-                    System.out.println("Put your file in resources and enter its name");
+                    System.out.println("Enter path to file");
                     filename = reader.readLine();
                     inputSource = InputSourceFactory.getInstance().getFileSource(filename);
                     break;
